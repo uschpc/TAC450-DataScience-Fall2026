@@ -12,17 +12,17 @@ First, we need to request an interactive session.
 
 If the reservation is on Tuesday:
 ```bash
-salloc --partition=gpu --gres=gpu:1 --cpus-per-task=16 --mem=64GB --time=01:00:00 --account=irahbari_1147 --reservation=tac450-tu
+salloc --partition=gpu --gres=gpu:1 --cpus-per-task=8 --mem=32GB --time=01:00:00 --account=irahbari_1147 --reservation=tac450-tu
 ```
 
 If the reservation is on Thursday:
 ```bash
-salloc --partition=gpu --gres=gpu:1 --cpus-per-task=16 --mem=64GB --time=01:00:00 --account=irahbari_1147 --reservation=tac450-th
+salloc --partition=gpu --gres=gpu:1 --cpus-per-task=8 --mem=32GB --time=01:00:00 --account=irahbari_1147 --reservation=tac450-th
 ```
 
 If the reservation is not available, please use the following command to request an interactive session: 
 ```bash
-salloc --partition=gpu --gres=gpu:v100:1 --cpus-per-task=16 --mem=64GB --time=01:00:00 --account=irahbari_1147
+salloc --partition=gpu --gres=gpu:v100:1 --cpus-per-task=8 --mem=32GB --time=01:00:00 --account=irahbari_1147
 ```
 
 
@@ -35,8 +35,8 @@ mkdir week3
 cd week3
 ```
 ```
-git clone https://github.com/uschpc/TAC450-DataScience-Fall2026
-cd TAC450-DataScience-Fall2026/week3
+git clone https://github.com/uschpc/TAC450-DataScience-Fall2025
+cd TAC450-DataScience-Fall2025/week3
 ```
 ```
 module load conda
@@ -74,6 +74,11 @@ If you’re working in a Python notebook, it will be connected to a Python kerne
 Similarly, Jupyter supports kernels for other languages, such as R, Julia, and MATLAB.
 
 The kernel manages the state of the notebook (such as variables, imports, and output), allowing you to run cells independently while maintaining continuity across the notebook. You can select or switch kernels from within the Jupyter interface.
+
+
+
+
+
 
 
 
