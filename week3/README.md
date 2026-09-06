@@ -35,8 +35,8 @@ mkdir week3
 cd week3
 ```
 ```
-git clone https://github.com/uschpc/TAC450-DataScience-Fall2025
-cd TAC450-DataScience-Fall2025/week3
+git clone https://github.com/uschpc/TAC450-DataScience-Fall2026
+cd TAC450-DataScience-Fall2026/week3
 ```
 ```
 module load conda
