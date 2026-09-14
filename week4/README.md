@@ -96,7 +96,7 @@ Job ID               | 2387422
 Job Name             | mnist
 User                 | haoji
 Account              | irahbari_1147
-Working directory    | /scratch1/haoji/week4/TAC450-DataScience-Fall2025/week4
+Working directory    | /scratch1/haoji/week4/TAC450-DataScience-Fall2026/week4
 Cluster              | discovery
 Partition            | gpu
 State                | COMPLETED
