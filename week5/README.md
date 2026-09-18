@@ -41,8 +41,8 @@ mkdir week5
 cd week5
 ```
 ```
-git clone https://github.com/uschpc/TAC450-DataScience-Fall2025
-cd TAC450-DataScience-Fall2025/week5
+git clone https://github.com/uschpc/TAC450-DataScience-Fall2026
+cd TAC450-DataScience-Fall2026/week5
 ```
 
 After the installation, please exit from the compute node. 
@@ -75,7 +75,7 @@ Within the Terminal Apps, change your working direcotry to your scratch director
 cd /scratch1/$(whoami)
 ```
 ```
-cd week5/TAC450-DataScience-Fall2025/week5
+cd week5/TAC450-DataScience-Fall2026/week5
 ```
 
 
