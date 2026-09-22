@@ -20,10 +20,7 @@ git clone https://github.com/uschpc/TAC450-DataScience-Fall2026
 cd TAC450-DataScience-Fall2026/week5
 ```
 
-After the installation, please exit from the compute node. 
-```
-exit
-```
+
 
 ## Run the Jupyter Notebook 
 Launch the Jupyter Notebook using OnDemand JupyterLab and run the different code blocks within the jupyter notebook. 
