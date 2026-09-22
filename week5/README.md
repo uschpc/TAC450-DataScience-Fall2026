@@ -89,3 +89,8 @@ Right Click on the http://localhost:6006/ link and select ‘Open link’, this 
 
 Note: if you have issues launching traveler desktop (when you click 'Launch Traveller Desktop', you see a black screen): 
 Please go to home directory, go to .config folder and rename xfce4 folder to something like xfce4-old and relaunch another session. 
+
+OR simply remove the folder
+```
+rm -rf ~/.config/xfce4
+```
