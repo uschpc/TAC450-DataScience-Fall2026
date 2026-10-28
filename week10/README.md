@@ -96,10 +96,10 @@ First, inspect the script ([see script](mnist_classify.py)) by running these com
 
 ```bash
 $ cd /scratch1/$(whoami)
-$ mkdir week9
-$ cd week9
-$ git clone https://github.com/uschpc/TAC450-DataScience-Fall2025.git
-$ cd /scratch1/$(whoami)/week9/TAC450-DataScience-Fall2025/week9
+$ mkdir week10
+$ cd week10
+$ git clone https://github.com/uschpc/TAC450-DataScience-Fall2026.git
+$ cd /scratch1/$(whoami)/week10/TAC450-DataScience-Fall2026/week10
 $ cat simple_ddp.py
 ```
 
