@@ -205,7 +205,7 @@ In the script above, `MASTER_PORT`, `MASTER_ADDR` and `WORLD_SIZE` are set. The 
 You can run the simple DPP script with:
 
 ```bash
-$ cd /scratch1/$(whoami)/TAC450-DataScience-Fall2025/week9
+$ cd /scratch1/$(whoami)/TAC450-DataScience-Fall2026/week10
 $ sbatch simple.slurm
 ```
 
