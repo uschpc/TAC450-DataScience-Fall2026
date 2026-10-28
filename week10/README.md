@@ -95,12 +95,12 @@ First login to CARC OnDemand: https://ondemand.carc.usc.edu/ and request a 'Disc
 First, inspect the script ([see script](mnist_classify.py)) by running these commands:
 
 ```bash
-$ cd /scratch1/$(whoami)
-$ mkdir week10
-$ cd week10
-$ git clone https://github.com/uschpc/TAC450-DataScience-Fall2026.git
-$ cd /scratch1/$(whoami)/week10/TAC450-DataScience-Fall2026/week10
-$ cat simple_ddp.py
+cd /scratch1/$(whoami)
+mkdir week10
+cd week10
+git clone https://github.com/uschpc/TAC450-DataScience-Fall2026.git
+cd /scratch1/$(whoami)/week10/TAC450-DataScience-Fall2026/week10
+cat simple_ddp.py
 ```
 
 Below is the Slurm script:
