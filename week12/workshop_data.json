@@ -1,0 +1,3985 @@
+{
+  "schema_version": 1,
+  "description": "Synthetic inputs and verified AWS CLI observations, Oregon, 2026-11-19. No credentials.",
+  "abstracts": [
+    {
+      "id": "A01",
+      "title": "Microscope inspection of alloy coupons",
+      "abstract": "Hairline defects in polished alloy coupons can escape a manual microscope inspection when lighting changes between sessions. In materials science, we trained a convolutional neural network on the AlloyScope-120 dataset to classify cropped images as scratched, pitted, or clear. The test partition held out entire coupons so that nearby crops could not appear on both sides of the split. We inspected disagreements under a second lamp setting and found that edges near the specimen holder were especially troublesome. The experiment uses fictional images and illustrates why specimen-level splits matter."
+    },
+    {
+      "id": "A02",
+      "title": "Velocity snapshots in a stepped channel",
+      "abstract": "A separated shear layer downstream of a channel step produces velocity structures that recur at several scales. This fluid mechanics study uses proper orthogonal decomposition on the StepFlow-240 dataset of two-dimensional velocity snapshots. Each snapshot is centered using a training-set mean before computing modes. We compare reconstructions using four, eight, and twelve modes at the same set of downstream locations. A secondary visualization overlays the mean reattachment line to help readers interpret the modes. Snapshot order and sensor calibration are frozen before comparing reconstruction errors across the three truncation levels."
+    },
+    {
+      "id": "A03",
+      "title": "Predicting seedling cover after rain",
+      "abstract": "In ecology, we used a random forest and the MesaPlots-64 dataset to predict seedling cover in dryland restoration plots after a short rain event. Inputs include shade fraction, surface gravel cover, and soil moisture recorded at the time of the survey. We grouped neighboring plots into blocks so that held-out plots were spatially separated from training plots. The prediction target is the fraction of ground covered by seedlings on the following visit. A simple median predictor serves as a reference, and feature rankings are interpreted cautiously because the measurements are correlated."
+    },
+    {
+      "id": "A04",
+      "title": "Estimating bus arrival delays",
+      "abstract": "This transportation study applies gradient-boosted trees to the HarborBus-30 dataset, a fictional collection of scheduled and observed bus arrivals from thirty weekdays. We estimate lateness at the next stop using the departure delay, stop spacing, and a coarse time-of-day indicator. Complete service days are held out to avoid sharing closely related runs across training and testing. A schedule-only baseline helps separate predictable timetable errors from unusual congestion. We report errors by route segment and compare the morning peak with midday service so that a single average cannot hide poor behavior on a busy corridor."
+    },
+    {
+      "id": "A05",
+      "title": "A closed-form heat transfer check",
+      "abstract": "In thermal engineering, we use the finite difference method to approximate the transient temperature in an insulated slab with a prescribed initial profile. The reference curve is evaluated directly from the stated analytical solution at each grid location. This is a numerical verification exercise and no dataset is specified. We halve the mesh spacing and reduce the time step according to the explicit stability limit. The reported quantity is the maximum error at a fixed physical time. We compare the decrease in error against the expected discretization order and keep all boundary conditions unchanged."
+    },
+    {
+      "id": "A06",
+      "title": "Indexing phrases in municipal minutes",
+      "abstract": "For a digital humanities study we applied logistic regression to the CouncilPages-90 dataset to label short passages from fictional city council minutes as budget, zoning, or public comment. The features are word counts after a fixed stopword filter. Whole meetings are assigned to either training or test so that recurring speakers cannot split a single discussion across partitions. We inspect troublesome phrases that appear in more than one category, including references to zoning fees. A small hand-audited subset is used to check that the passage labels follow the stated topic definitions consistently."
+    },
+    {
+      "id": "A07",
+      "title": "Separating cloud and surface signals",
+      "abstract": "In remote sensing, we trained a U-Net to identify cloud-covered pixels in the CoastMask-32 dataset of fictional coastal satellite tiles. Training tiles are separated from validation tiles by acquisition date. We compare the predicted cloud masks with hand-drawn reference masks using intersection over union. Thin cloud boundaries over bright sand are reviewed separately because small shifts strongly affect the overlap metric there. The model takes three visible channels and returns one cloud probability per pixel. We retain the original coastline orientation so that reviewers can locate each example on an index map."
+    },
+    {
+      "id": "A08",
+      "title": "Delivery center queue under a burst",
+      "abstract": "This operations research study uses discrete-event simulation to estimate waiting times at a parcel sorting center under a bursty arrival policy. Arrivals and service durations are generated from distributions defined in the experiment. No dataset is specified. We compare two staffing schedules over identical simulated arrival sequences and repeat the comparison with several independent random seeds. The main quantity of interest is the fraction of parcels waiting longer than twenty minutes. We also track how long spare capacity sits idle and report the assumptions needed to interpret a favorable result during the first hour."
+    },
+    {
+      "id": "A09",
+      "title": "Tracking a resonance from phone recordings",
+      "abstract": "In acoustics, we use the fast Fourier transform on the RoomTone-48 dataset to identify a dominant resonance in short recordings of a fictional test room. Each waveform is aligned to the same sampling rate and analyzed with overlapping windows. We compare the strongest spectral peak across microphone positions and flag clips with a weak peak relative to nearby frequencies. An annotated frequency reference allows readers to check whether the peak remains in the expected band. We retain quiet clips in the evaluation because background noise can lead to confident-looking but inconsistent resonance estimates."
+    },
+    {
+      "id": "A10",
+      "title": "Ranking seasonal energy demand",
+      "abstract": "This energy systems project uses ridge regression on the CampusLoad-52 dataset to forecast peak electricity demand for a fictional campus. Input features summarize temperature, occupancy, and the previous week of power measurements. The model is trained on the earlier part of the calendar, with the most recent weeks reserved for evaluation. A persistence baseline copies the most recent observed peak. The team examines errors during holiday weeks as well as ordinary teaching weeks because occupancy can depart sharply from a typical schedule. Predictions are compared at the same forecast horizon and reported in kilowatts."
+    },
+    {
+      "id": "A11",
+      "title": "Timing a tabletop orbit integrator",
+      "abstract": "In computational physics, we implemented velocity Verlet for a two-body orbit with a stated central force and initial conditions. We compare energy drift over a fixed number of revolutions as the time step decreases. No dataset is specified. The reference is the analytic orbit evaluated at matching time points. A second check repeats the integration in reverse from the computed final state to quantify accumulated roundoff and discretization effects. The small experiment is designed to separate errors from the numerical integration scheme from errors introduced when selecting or interpolating a stored reference trajectory."
+    },
+    {
+      "id": "A12",
+      "title": "Clustering workshop participation patterns",
+      "abstract": "In education research, we used k-means clustering on the StudyHabits-72 dataset to group fictional weekly patterns of workshop participation. The input variables summarize completed exercises, question submissions, and time spent reviewing worked examples. We scale each variable using statistics computed from a fixed development split. To assess sensitivity, we rerun the clustering from several initial centroids and compare group assignments after matching cluster labels. The clusters describe patterns of activity in the synthetic records. We also inspect how the cluster centers move when one participation variable is omitted from the analysis."
+    }
+  ],
+  "answer_key": [
+    {
+      "id": "A01",
+      "research_area": "Materials science",
+      "method": "Convolutional neural network",
+      "dataset": "AlloyScope-120"
+    },
+    {
+      "id": "A02",
+      "research_area": "Fluid mechanics",
+      "method": "Proper orthogonal decomposition",
+      "dataset": "StepFlow-240"
+    },
+    {
+      "id": "A03",
+      "research_area": "Ecology",
+      "method": "Random forest",
+      "dataset": "MesaPlots-64"
+    },
+    {
+      "id": "A04",
+      "research_area": "Transportation",
+      "method": "Gradient-boosted trees",
+      "dataset": "HarborBus-30"
+    },
+    {
+      "id": "A05",
+      "research_area": "Thermal engineering",
+      "method": "Finite difference method",
+      "dataset": null
+    },
+    {
+      "id": "A06",
+      "research_area": "Digital humanities",
+      "method": "Logistic regression",
+      "dataset": "CouncilPages-90"
+    },
+    {
+      "id": "A07",
+      "research_area": "Remote sensing",
+      "method": "U-Net",
+      "dataset": "CoastMask-32"
+    },
+    {
+      "id": "A08",
+      "research_area": "Operations research",
+      "method": "Discrete-event simulation",
+      "dataset": null
+    },
+    {
+      "id": "A09",
+      "research_area": "Acoustics",
+      "method": "Fast Fourier transform",
+      "dataset": "RoomTone-48"
+    },
+    {
+      "id": "A10",
+      "research_area": "Energy systems",
+      "method": "Ridge regression",
+      "dataset": "CampusLoad-52"
+    },
+    {
+      "id": "A11",
+      "research_area": "Computational physics",
+      "method": "Velocity Verlet",
+      "dataset": null
+    },
+    {
+      "id": "A12",
+      "research_area": "Education research",
+      "method": "K-means clustering",
+      "dataset": "StudyHabits-72"
+    }
+  ],
+  "extraction_prompt": "Read the abstract below. Extract the explicitly stated research area, primary method, and dataset name.\nReturn exactly one JSON object with these three keys: research_area, method, dataset.\nCopy the stated labels and dataset name. If no dataset is specified, use JSON null.\nIgnore methods mentioned only as baselines. Do not include Markdown, explanations, or extra keys.\n\nAbstract:\n",
+  "cache_questions": [
+    {
+      "id": "Q1",
+      "question": "What is the controller sample interval in seconds? Return only the number.",
+      "answer": "2",
+      "evidence": "03. Logging schedule"
+    },
+    {
+      "id": "Q2",
+      "question": "How far downstream of the mixing tee is the return probe, in cm? Return only the number.",
+      "answer": "18",
+      "evidence": "02. Probe placement"
+    },
+    {
+      "id": "Q3",
+      "question": "How many consecutive seconds must the minimum qualification flow hold? Return only the number.",
+      "answer": "90",
+      "evidence": "06. Flow gate"
+    },
+    {
+      "id": "Q4",
+      "question": "How many days are raw logs retained? Return only the number.",
+      "answer": "180",
+      "evidence": "16. Archive"
+    }
+  ],
+  "cache_manual": "# LoopCheck-17 bench qualification manual\n\nFictional technical reference for a teaching exercise. This manual describes a small benchtop liquid loop and the records used to qualify it.\n\n## 01. Inventory\n\nThe designated qualification fluid is dyed deionized water. The LoopCheck-17 qualification run uses a 3.0 liter inventory. A graduated reservoir records the initial fill level before the isolation valve is opened.\n\n**Recording example 01.** Record units in a dedicated field so downstream scripts can check consistency before combining runs. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Use the fixture revision printed on the bench label when the template and mounted fixture disagree. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 02. Probe placement\n\nThe return probe is installed 18 cm downstream of the mixing tee. The clamp mark on the tube is the reference location. Staff record the distance along the tube centerline.\n\n**Recording example 02.** If a value cannot be recovered, record the missing field explicitly and retain the incomplete record for later review. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Before making a change, note the previous value in the run log for later comparison. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 03. Logging schedule\n\nThe controller samples each probe every 2 seconds. The operator writes a manual observation every 60 seconds. The two streams can be aligned using the start marker in the controller log.\n\n**Recording example 03.** During handover, point to the matching entry in the raw log before interpreting a summary statistic. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Keep the operator event sequence intact when copying observations into the review worksheet. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 04. Calibration\n\nEach probe is checked at two temperatures before qualification. The allowed mismatch is 0.15 degrees Celsius. A failed check sends the sensor to the spare-parts shelf for a repeat measurement.\n\n**Recording example 04.** Use the fixture revision printed on the bench label when the template and mounted fixture disagree. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Discuss any discrepancy during the post-run review and cite the corresponding timestamp. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 05. Pressure measurement\n\nPressure is measured upstream of the return filter. The pressure channel reports kilopascals. Technicians note the filter-lot tag when they replace the cartridge.\n\n**Recording example 05.** Before making a change, note the previous value in the run log for later comparison. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Archive the worksheet together with the exported data so another group can repeat the analysis. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 06. Flow gate\n\nBeginning at steady state, the qualification requires a flow of at least 1.4 liters per minute. The minimum must hold for 90 consecutive seconds. A missed sample restarts the holding window.\n\n**Recording example 06.** Keep the operator event sequence intact when copying observations into the review worksheet. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Record units in a dedicated field so downstream scripts can check consistency before combining runs. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 07. Temperature gate\n\nThe outlet-to-inlet temperature rise must stay below 4.5 degrees Celsius during qualification. An operator records the largest rise observed in the holding window. The report preserves the original measurement precision.\n\n**Recording example 07.** Discuss any discrepancy during the post-run review and cite the corresponding timestamp. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** If a value cannot be recovered, record the missing field explicitly and retain the incomplete record for later review. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 08. Timing\n\nThe qualification hold is followed by a 5 minute observational cool-down. This interval starts when the load command is set to idle. Operator notes remain enabled during that period.\n\n**Recording example 08.** Archive the worksheet together with the exported data so another group can repeat the analysis. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** During handover, point to the matching entry in the raw log before interpreting a summary statistic. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 09. Stop procedure\n\nIf an alarm persists across three consecutive samples, the operator pauses the test and records the event code. The pump is set to idle before a technician examines the bench.\n\n**Recording example 09.** Record units in a dedicated field so downstream scripts can check consistency before combining runs. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Use the fixture revision printed on the bench label when the template and mounted fixture disagree. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 10. Metadata\n\nEvery raw log includes the loop identifier, fixture revision, operator initials, and start timestamp. The experiment label appears in the header of the exported table. The export remains readable by a standard text editor.\n\n**Recording example 10.** If a value cannot be recovered, record the missing field explicitly and retain the incomplete record for later review. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Before making a change, note the previous value in the run log for later comparison. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 11. Baseline\n\nThe reference run uses the plain return filter. The second run uses the fine return filter. The bench load, controller software, and logging cadence are fixed for both runs.\n\n**Recording example 11.** During handover, point to the matching entry in the raw log before interpreting a summary statistic. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Keep the operator event sequence intact when copying observations into the review worksheet. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 12. Replicates\n\nFor each filter type, complete three independent qualification runs. Refill the reservoir from the same supply between runs. Record the order before beginning the experiment.\n\n**Recording example 12.** Use the fixture revision printed on the bench label when the template and mounted fixture disagree. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Discuss any discrepancy during the post-run review and cite the corresponding timestamp. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 13. Data review\n\nDuring review, preserve all rows in the raw export. Mark invalid sensor readings using a separate flag table. Summaries may filter flagged rows after the count of excluded rows has been reported.\n\n**Recording example 13.** Before making a change, note the previous value in the run log for later comparison. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Archive the worksheet together with the exported data so another group can repeat the analysis. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 14. Temperature reporting\n\nThe internal notebook stores temperature readings in degrees Celsius. The summary report gives the median and the largest observed rise. The raw sensor columns remain available for later review.\n\n**Recording example 14.** Keep the operator event sequence intact when copying observations into the review worksheet. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** Record units in a dedicated field so downstream scripts can check consistency before combining runs. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 15. Release\n\nThe bench supervisor must sign the equipment checklist before a run can be used as a reference. Capturing the signed checklist completes the qualification record. Pending runs remain marked preliminary.\n\n**Recording example 15.** Discuss any discrepancy during the post-run review and cite the corresponding timestamp. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** If a value cannot be recovered, record the missing field explicitly and retain the incomplete record for later review. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n\n## 16. Archive\n\nThe raw log retention period is 180 days. The qualification summary remains available for one year. Amendments are stored alongside the original report with the date and reason for the edit.\n\n**Recording example 16.** Archive the worksheet together with the exported data so another group can repeat the analysis. For this step, the checklist has fields for a timestamp, a condition label, a review flag, and a brief explanation. Enter the condition before reviewing the next section. Indicate when the event happened and whether the measurement was carried forward into the summary. The equipment log and summary table both refer to the same run identifier. If the two entries disagree, use the original acquisition record to resolve the difference and document the correction in the worksheet.\n\n**Hand-off check.** During handover, point to the matching entry in the raw log before interpreting a summary statistic. A second reviewer checks that the run identifier and fixture revision agree across files. This cross-check is performed in acquisition order before computing any summary statistics. The reviewer records the result once per run and preserves the original row order for future inspection.\n",
+  "rates": {
+    "region": "us-west-2",
+    "verified_date": "2026-11-19",
+    "currency": "USD",
+    "unit": "per million tokens",
+    "models": {
+      "amazon.nova-lite-v1:0": {
+        "input": 0.06,
+        "output": 0.24,
+        "cache_read": 0.015,
+        "cache_write": 0.0
+      },
+      "us.amazon.nova-micro-v1:0": {
+        "input": 0.035,
+        "output": 0.14,
+        "cache_read": 0.00875,
+        "cache_write": 0.0
+      },
+      "us.amazon.nova-lite-v1:0": {
+        "batch_input": 0.03,
+        "batch_output": 0.12
+      }
+    },
+    "source": "AWS Price List, us-west-2 offer version 20261111013037 (published 2026-11-11)",
+    "source_url": "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrock/current/us-west-2/index.json"
+  },
+  "saved": {
+    "selection": [
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 182,
+            "outputTokens": 40,
+            "totalTokens": 222
+          },
+          "metrics": {
+            "latencyMs": 408
+          }
+        },
+        "latency_s": 1.2075829509999494,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A01"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 187,
+            "outputTokens": 38,
+            "totalTokens": 225
+          },
+          "metrics": {
+            "latencyMs": 385
+          }
+        },
+        "latency_s": 1.1864954769998803,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A02"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 186,
+            "outputTokens": 37,
+            "totalTokens": 223
+          },
+          "metrics": {
+            "latencyMs": 392
+          }
+        },
+        "latency_s": 1.1632010179996541,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A03"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 193,
+            "outputTokens": 30,
+            "totalTokens": 223
+          },
+          "metrics": {
+            "latencyMs": 371
+          }
+        },
+        "latency_s": 1.1471235829999387,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A04"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 180,
+            "outputTokens": 32,
+            "totalTokens": 212
+          },
+          "metrics": {
+            "latencyMs": 333
+          }
+        },
+        "latency_s": 1.1405367980000847,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A05"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 185,
+            "outputTokens": 28,
+            "totalTokens": 213
+          },
+          "metrics": {
+            "latencyMs": 293
+          }
+        },
+        "latency_s": 1.085028240000156,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A06"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 186,
+            "outputTokens": 37,
+            "totalTokens": 223
+          },
+          "metrics": {
+            "latencyMs": 507
+          }
+        },
+        "latency_s": 1.289486707999913,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A07"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 181,
+            "outputTokens": 33,
+            "totalTokens": 214
+          },
+          "metrics": {
+            "latencyMs": 423
+          }
+        },
+        "latency_s": 1.2207136530000753,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A08"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 183,
+            "outputTokens": 28,
+            "totalTokens": 211
+          },
+          "metrics": {
+            "latencyMs": 326
+          }
+        },
+        "latency_s": 1.229156845000034,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A09"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 185,
+            "outputTokens": 36,
+            "totalTokens": 221
+          },
+          "metrics": {
+            "latencyMs": 390
+          }
+        },
+        "latency_s": 1.165660282999852,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A10"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 183,
+            "outputTokens": 33,
+            "totalTokens": 216
+          },
+          "metrics": {
+            "latencyMs": 333
+          }
+        },
+        "latency_s": 1.1364586300001065,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A11"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 187,
+            "outputTokens": 39,
+            "totalTokens": 226
+          },
+          "metrics": {
+            "latencyMs": 248
+          }
+        },
+        "latency_s": 1.0324364399998558,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A12"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 182,
+            "outputTokens": 36,
+            "totalTokens": 218
+          },
+          "metrics": {
+            "latencyMs": 298
+          }
+        },
+        "latency_s": 1.0774256070003503,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A01"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 187,
+            "outputTokens": 34,
+            "totalTokens": 221
+          },
+          "metrics": {
+            "latencyMs": 383
+          }
+        },
+        "latency_s": 1.1765427209998052,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A02"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 186,
+            "outputTokens": 33,
+            "totalTokens": 219
+          },
+          "metrics": {
+            "latencyMs": 321
+          }
+        },
+        "latency_s": 1.0833987640003215,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A03"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"transportation study\",\n  \"method\": \"gradient-boosted trees\",\n  \"dataset\": \"HarborBus-30\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 193,
+            "outputTokens": 36,
+            "totalTokens": 229
+          },
+          "metrics": {
+            "latencyMs": 409
+          }
+        },
+        "latency_s": 1.1737481230002231,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A04"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 180,
+            "outputTokens": 28,
+            "totalTokens": 208
+          },
+          "metrics": {
+            "latencyMs": 289
+          }
+        },
+        "latency_s": 1.0692533500000536,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A05"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"digital humanities\",\n  \"method\": \"logistic regression\",\n  \"dataset\": \"CouncilPages-90\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 185,
+            "outputTokens": 33,
+            "totalTokens": 218
+          },
+          "metrics": {
+            "latencyMs": 280
+          }
+        },
+        "latency_s": 1.0561563630003548,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A06"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 186,
+            "outputTokens": 33,
+            "totalTokens": 219
+          },
+          "metrics": {
+            "latencyMs": 316
+          }
+        },
+        "latency_s": 1.0905678350000017,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A07"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 181,
+            "outputTokens": 29,
+            "totalTokens": 210
+          },
+          "metrics": {
+            "latencyMs": 364
+          }
+        },
+        "latency_s": 1.1703655090000211,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A08"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"acoustics\",\n  \"method\": \"fast Fourier transform\",\n  \"dataset\": \"RoomTone-48\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 183,
+            "outputTokens": 33,
+            "totalTokens": 216
+          },
+          "metrics": {
+            "latencyMs": 347
+          }
+        },
+        "latency_s": 1.1804619790000288,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A09"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 185,
+            "outputTokens": 32,
+            "totalTokens": 217
+          },
+          "metrics": {
+            "latencyMs": 398
+          }
+        },
+        "latency_s": 1.193475092999961,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A10"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 183,
+            "outputTokens": 29,
+            "totalTokens": 212
+          },
+          "metrics": {
+            "latencyMs": 276
+          }
+        },
+        "latency_s": 1.0898713450001196,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A11"
+      },
+      {
+        "model": "us.amazon.nova-micro-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 187,
+            "outputTokens": 35,
+            "totalTokens": 222
+          },
+          "metrics": {
+            "latencyMs": 341
+          }
+        },
+        "latency_s": 1.108523453000089,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "abstract_id": "A12"
+      }
+    ],
+    "sweep": [
+      {
+        "workers": 1,
+        "elapsed_s": 29.706143343999884,
+        "calls": [
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 511
+              }
+            },
+            "latency_s": 1.3882353429999057,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 495
+              }
+            },
+            "latency_s": 1.2669231049999325,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 289
+              }
+            },
+            "latency_s": 1.1221435409997866,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 382
+              }
+            },
+            "latency_s": 1.1747425789999397,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 342
+              }
+            },
+            "latency_s": 1.1311807399997633,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 439
+              }
+            },
+            "latency_s": 1.2698036140000113,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 366
+              }
+            },
+            "latency_s": 1.1293291619999763,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 358
+              }
+            },
+            "latency_s": 1.1205542530001367,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 268
+              }
+            },
+            "latency_s": 1.063624376000007,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 403
+              }
+            },
+            "latency_s": 1.206251204000182,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 394
+              }
+            },
+            "latency_s": 1.1635795349998261,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 443
+              }
+            },
+            "latency_s": 1.2285892310001145,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 537
+              }
+            },
+            "latency_s": 1.3564006560000053,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 476
+              }
+            },
+            "latency_s": 1.2724946499997714,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 310
+              }
+            },
+            "latency_s": 1.3032427739999548,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 373
+              }
+            },
+            "latency_s": 1.168546157000037,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 524
+              }
+            },
+            "latency_s": 1.4324656570001935,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 285
+              }
+            },
+            "latency_s": 1.9656753079998452,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 392
+              }
+            },
+            "latency_s": 1.1598481989999527,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 327
+              }
+            },
+            "latency_s": 1.0943212150000363,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 347
+              }
+            },
+            "latency_s": 1.115397941000083,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 338
+              }
+            },
+            "latency_s": 1.1478768400002082,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 384
+              }
+            },
+            "latency_s": 1.1677450909996878,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 479
+              }
+            },
+            "latency_s": 1.253879212999891,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          }
+        ]
+      },
+      {
+        "workers": 2,
+        "elapsed_s": 30.213227628000368,
+        "calls": [
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 558
+              }
+            },
+            "latency_s": 2.6800490000000536,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 528
+              }
+            },
+            "latency_s": 2.7002501319998373,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 372
+              }
+            },
+            "latency_s": 2.4700887999997576,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"transportation study\",\n  \"method\": \"gradient-boosted trees\",\n  \"dataset\": \"HarborBus-30\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 40,
+                "totalTokens": 233
+              },
+              "metrics": {
+                "latencyMs": 458
+              }
+            },
+            "latency_s": 2.573154166999757,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 371
+              }
+            },
+            "latency_s": 2.731096496999726,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 298
+              }
+            },
+            "latency_s": 2.3758800919999885,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 394
+              }
+            },
+            "latency_s": 2.4036565159999554,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 347
+              }
+            },
+            "latency_s": 2.3952326849998826,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 277
+              }
+            },
+            "latency_s": 2.8187953909996395,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 362
+              }
+            },
+            "latency_s": 2.604582855999979,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 380
+              }
+            },
+            "latency_s": 2.915636874000029,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 422
+              }
+            },
+            "latency_s": 2.975676496000233,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 419
+              }
+            },
+            "latency_s": 2.7002071609999803,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 470
+              }
+            },
+            "latency_s": 2.8090839429996777,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 342
+              }
+            },
+            "latency_s": 2.342501808000179,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 312
+              }
+            },
+            "latency_s": 2.4187224440001955,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 349
+              }
+            },
+            "latency_s": 2.4108821210002134,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 363
+              }
+            },
+            "latency_s": 2.4965509280000333,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 332
+              }
+            },
+            "latency_s": 2.274858412999947,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 420
+              }
+            },
+            "latency_s": 2.376315297000019,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 321
+              }
+            },
+            "latency_s": 2.203094215999954,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 320
+              }
+            },
+            "latency_s": 2.2302780949999033,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 468
+              }
+            },
+            "latency_s": 2.1323309220001647,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 551
+              }
+            },
+            "latency_s": 2.0244178839998312,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          }
+        ]
+      },
+      {
+        "workers": 4,
+        "elapsed_s": 27.565857536000294,
+        "calls": [
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 429
+              }
+            },
+            "latency_s": 5.283794880000187,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 326
+              }
+            },
+            "latency_s": 4.452090695000152,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 339
+              }
+            },
+            "latency_s": 5.14117919499995,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 412
+              }
+            },
+            "latency_s": 3.995375955000327,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 442
+              }
+            },
+            "latency_s": 4.15937914999995,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 297
+              }
+            },
+            "latency_s": 4.733279337000113,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 370
+              }
+            },
+            "latency_s": 4.838586191000104,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 391
+              }
+            },
+            "latency_s": 5.001298971999859,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 365
+              }
+            },
+            "latency_s": 4.518295690999821,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 343
+              }
+            },
+            "latency_s": 4.7156834019997405,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 306
+              }
+            },
+            "latency_s": 4.488439635000304,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 356
+              }
+            },
+            "latency_s": 4.783052418999887,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 419
+              }
+            },
+            "latency_s": 3.9982756330000484,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 381
+              }
+            },
+            "latency_s": 4.899034833999849,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 360
+              }
+            },
+            "latency_s": 5.296241478999946,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 342
+              }
+            },
+            "latency_s": 4.668657093000093,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 391
+              }
+            },
+            "latency_s": 4.378000847999829,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 398
+              }
+            },
+            "latency_s": 5.105253634000292,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 640
+              }
+            },
+            "latency_s": 4.545177861999946,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 542
+              }
+            },
+            "latency_s": 3.9841392609996547,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 294
+              }
+            },
+            "latency_s": 3.932204524000099,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 356
+              }
+            },
+            "latency_s": 3.6088530300003185,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 341
+              }
+            },
+            "latency_s": 3.5053149139998823,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 380
+              }
+            },
+            "latency_s": 3.282887881000079,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          }
+        ]
+      },
+      {
+        "workers": 8,
+        "elapsed_s": 28.89651039399996,
+        "calls": [
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 324
+              }
+            },
+            "latency_s": 8.623789473000215,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 311
+              }
+            },
+            "latency_s": 9.612323527000171,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 465
+              }
+            },
+            "latency_s": 9.793608905999918,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 283
+              }
+            },
+            "latency_s": 9.581457899999805,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 379
+              }
+            },
+            "latency_s": 10.661312802000339,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 289
+              }
+            },
+            "latency_s": 10.769149432000177,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 328
+              }
+            },
+            "latency_s": 9.076684876999934,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 360
+              }
+            },
+            "latency_s": 8.435994886999651,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 265
+              }
+            },
+            "latency_s": 9.684553839000273,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 891
+              }
+            },
+            "latency_s": 10.752114107000125,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 355
+              }
+            },
+            "latency_s": 11.165564175999862,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 370
+              }
+            },
+            "latency_s": 8.688450395000018,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"materials science\",\n  \"method\": \"convolutional neural network\",\n  \"dataset\": \"AlloyScope-120\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 182,
+                "outputTokens": 40,
+                "totalTokens": 222
+              },
+              "metrics": {
+                "latencyMs": 357
+              }
+            },
+            "latency_s": 8.678843821999635,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A01"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"fluid mechanics\",\n  \"method\": \"proper orthogonal decomposition\",\n  \"dataset\": \"StepFlow-240\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 38,
+                "totalTokens": 225
+              },
+              "metrics": {
+                "latencyMs": 391
+              }
+            },
+            "latency_s": 10.518560293999599,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A02"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"ecology\",\n  \"method\": \"random forest\",\n  \"dataset\": \"MesaPlots-64\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 366
+              }
+            },
+            "latency_s": 9.92943491899996,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A03"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"transportation\", \"method\": \"gradient-boosted trees\", \"dataset\": \"HarborBus-30\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 193,
+                "outputTokens": 30,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 257
+              }
+            },
+            "latency_s": 8.140700096999808,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A04"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"thermal engineering\",\n  \"method\": \"finite difference method\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 180,
+                "outputTokens": 32,
+                "totalTokens": 212
+              },
+              "metrics": {
+                "latencyMs": 248
+              }
+            },
+            "latency_s": 10.102619709999999,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A05"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"digital humanities\", \"method\": \"logistic regression\", \"dataset\": \"CouncilPages-90\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 28,
+                "totalTokens": 213
+              },
+              "metrics": {
+                "latencyMs": 249
+              }
+            },
+            "latency_s": 9.905788589000167,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A06"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"remote sensing\",\n  \"method\": \"U-Net\",\n  \"dataset\": \"CoastMask-32\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 186,
+                "outputTokens": 37,
+                "totalTokens": 223
+              },
+              "metrics": {
+                "latencyMs": 405
+              }
+            },
+            "latency_s": 9.082304109999768,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A07"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"operations research\",\n  \"method\": \"discrete-event simulation\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 181,
+                "outputTokens": 33,
+                "totalTokens": 214
+              },
+              "metrics": {
+                "latencyMs": 463
+              }
+            },
+            "latency_s": 9.266566033000345,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A08"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "{\"research_area\": \"acoustics\", \"method\": \"fast Fourier transform\", \"dataset\": \"RoomTone-48\"}"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 28,
+                "totalTokens": 211
+              },
+              "metrics": {
+                "latencyMs": 267
+              }
+            },
+            "latency_s": 9.098704032000114,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A09"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"energy systems\",\n  \"method\": \"ridge regression\",\n  \"dataset\": \"CampusLoad-52\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 185,
+                "outputTokens": 36,
+                "totalTokens": 221
+              },
+              "metrics": {
+                "latencyMs": 519
+              }
+            },
+            "latency_s": 8.621792251999977,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A10"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"computational physics\",\n  \"method\": \"velocity Verlet\",\n  \"dataset\": null\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 183,
+                "outputTokens": 33,
+                "totalTokens": 216
+              },
+              "metrics": {
+                "latencyMs": 337
+              }
+            },
+            "latency_s": 8.187001627999962,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A11"
+          },
+          {
+            "model": "amazon.nova-lite-v1:0",
+            "response": {
+              "output": {
+                "message": {
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "text": "```json\n{\n  \"research_area\": \"education research\",\n  \"method\": \"k-means clustering\",\n  \"dataset\": \"StudyHabits-72\"\n}\n```"
+                    }
+                  ]
+                }
+              },
+              "stopReason": "end_turn",
+              "usage": {
+                "inputTokens": 187,
+                "outputTokens": 39,
+                "totalTokens": 226
+              },
+              "metrics": {
+                "latencyMs": 371
+              }
+            },
+            "latency_s": 8.184967266000058,
+            "attempts": 1,
+            "errors": [],
+            "source": "live AWS CLI",
+            "abstract_id": "A12"
+          }
+        ]
+      }
+    ],
+    "cache": [
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "2"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 3735,
+            "outputTokens": 3,
+            "totalTokens": 3738
+          },
+          "metrics": {
+            "latencyMs": 331
+          }
+        },
+        "latency_s": 1.1128543110003193,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "baseline",
+        "question_id": "Q1"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "18"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 3741,
+            "outputTokens": 4,
+            "totalTokens": 3745
+          },
+          "metrics": {
+            "latencyMs": 425
+          }
+        },
+        "latency_s": 1.2231504800001858,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "baseline",
+        "question_id": "Q2"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "90"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 3737,
+            "outputTokens": 4,
+            "totalTokens": 3741
+          },
+          "metrics": {
+            "latencyMs": 409
+          }
+        },
+        "latency_s": 1.1905582630001845,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "baseline",
+        "question_id": "Q3"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "180"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 3734,
+            "outputTokens": 5,
+            "totalTokens": 3739
+          },
+          "metrics": {
+            "latencyMs": 334
+          }
+        },
+        "latency_s": 1.1265942240002005,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "baseline",
+        "question_id": "Q4"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "2"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 14,
+            "outputTokens": 3,
+            "totalTokens": 3738,
+            "cacheReadInputTokens": 0,
+            "cacheWriteInputTokens": 3721
+          },
+          "metrics": {
+            "latencyMs": 342
+          }
+        },
+        "latency_s": 1.1056691320000027,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "checkpoint",
+        "question_id": "Q1"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "18"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 20,
+            "outputTokens": 4,
+            "totalTokens": 3745,
+            "cacheReadInputTokens": 3721,
+            "cacheWriteInputTokens": 0
+          },
+          "metrics": {
+            "latencyMs": 353
+          }
+        },
+        "latency_s": 1.117980099000306,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "checkpoint",
+        "question_id": "Q2"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "90"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 16,
+            "outputTokens": 4,
+            "totalTokens": 3741,
+            "cacheReadInputTokens": 3721,
+            "cacheWriteInputTokens": 0
+          },
+          "metrics": {
+            "latencyMs": 349
+          }
+        },
+        "latency_s": 1.3010508209999898,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "checkpoint",
+        "question_id": "Q3"
+      },
+      {
+        "model": "amazon.nova-lite-v1:0",
+        "response": {
+          "output": {
+            "message": {
+              "role": "assistant",
+              "content": [
+                {
+                  "text": "180"
+                }
+              ]
+            }
+          },
+          "stopReason": "end_turn",
+          "usage": {
+            "inputTokens": 13,
+            "outputTokens": 5,
+            "totalTokens": 3739,
+            "cacheReadInputTokens": 3721,
+            "cacheWriteInputTokens": 0
+          },
+          "metrics": {
+            "latencyMs": 335
+          }
+        },
+        "latency_s": 1.1468666900000244,
+        "attempts": 1,
+        "errors": [],
+        "source": "live AWS CLI",
+        "arm": "checkpoint",
+        "question_id": "Q4"
+      }
+    ]
+  },
+  "batch_summary": {
+    "expected_records": 100,
+    "output_lines": 100,
+    "responses": 100,
+    "missing": 0,
+    "duplicate_ids": 0,
+    "unknown_ids": 0,
+    "service_errors": 0,
+    "valid_json": 25,
+    "exact": 25
+  },
+  "batch_input_example": {
+    "recordId": "A01-0001",
+    "modelInput": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "text": "Read the abstract below. Extract the explicitly stated research area, primary method, and dataset name.\nReturn exactly one JSON object with these three keys: research_area, method, dataset.\nCopy the stated labels and dataset name. If no dataset is specified, use JSON null.\nIgnore methods mentioned only as baselines. Do not include Markdown, explanations, or extra keys.\n\nAbstract:\nHairline defects in polished alloy coupons can escape a manual microscope inspection when lighting changes between sessions. In materials science, we trained a convolutional neural network on the AlloyScope-120 dataset to classify cropped images as scratched, pitted, or clear. The test partition held out entire coupons so that nearby crops could not appear on both sides of the split. We inspected disagreements under a second lamp setting and found that edges near the specimen holder were especially troublesome. The experiment uses fictional images and illustrates why specimen-level splits matter."
+            }
+          ]
+        }
+      ],
+      "inferenceConfig": {
+        "maxTokens": 96,
+        "temperature": 0.0,
+        "topP": 0.9
+      }
+    }
+  }
+}
